@@ -7,14 +7,14 @@ import postRoutes from './routes/posts.js';
 
 const app = express();
 
-//middleware, every route inside of posts will start with /posts
-app.use('/posts', postRoutes);
-
 //middleware for bodyparser to send requests
 app.use(express.json({ limit: "30mb" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 //cors middleware
 app.use(cors());
+
+//middleware, every route inside of posts will start with /posts
+app.use('/posts', postRoutes);
 
 const CONNECTION_URL = 'mongodb+srv://Kyle:A92E19g20@cluster0.ul97hvn.mongodb.net/?retryWrites=true&w=majority';
 const PORT = process.env.PORT || 5000;
