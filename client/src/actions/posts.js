@@ -1,6 +1,6 @@
 import * as api from '../api';
 
-//ACtion Creators
+//Action Creators
 export const getPosts = () => async (dispatch) => {
     try {
         //requests data from backend
@@ -13,4 +13,16 @@ export const getPosts = () => async (dispatch) => {
         console.log(error.message);
     }
     
+}
+
+export const createPost = (post) => async (dispatch) => {
+    try {
+        //requesting a post from back end api 
+        const {data} = await api.createPost(post);
+
+        //receives request and dispatches post to create it
+        dispatch({type: 'CREATE', payload: data});
+    } catch (error) {
+        console.log(error.message);
+    }
 }
