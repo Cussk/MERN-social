@@ -1,4 +1,5 @@
 import React from "react";
+import { Grid, CircularProgress } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Post from "./Post/Post";
 import useStyles from "./styles";
@@ -10,11 +11,19 @@ const Posts = () => {
     console.log(posts);
     
     return (
-        <>
-            <h1>POSTS</h1>
-            <Post />
-            <Post />
-        </>
+        //if no posts to retrieve display loading spinner
+        !posts.length ? <CircularProgress /> : (
+            //else display grid of posts
+            <Grid className={classes.container} container alignItems='stretch' spacing={3}>
+                {/* display post array */}
+                {posts.map((post) => (
+                    <Grid key={post._id} item xs={12} sm={6}>
+                        {/* display individual posts */}
+                        <Post post={post} />
+                    </Grid>
+                ))}   
+            </Grid>
+        )
     );
 }
 
