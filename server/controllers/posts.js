@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 import PostMessage from '../models/postMessage.js'
 
 //logic for all routes
+
+//FETCH
 export const getPosts = async (req, res) => {
     //tries to find any existing posts
     try {
@@ -15,6 +17,7 @@ export const getPosts = async (req, res) => {
     }
 }
 
+//CREATE
 export const createPost = async (req, res) => {
     const {title, message, selectedFile, creator, tags} = req.body;
 
@@ -32,7 +35,7 @@ export const createPost = async (req, res) => {
     }
 }
 
-
+//UPDATE
 export const updatePost = async (req,res) => {
     //requests parameters for specific id
     const {id: _id} = req.params;
@@ -46,5 +49,20 @@ export const updatePost = async (req,res) => {
     //updates post  in database by finding its id
      const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, {new: true});
 
+     //returns updated post json object
      res.json(updatedPost);
+}
+
+// DELETE
+export const deletePost = async (req,res) => {
+    const {id} = req.params;
+
+    //if not valid mongoose id return 404 error
+    if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('No post with that id');
+
+    //deletes post based on id
+    await PostMessage.findByIdAndRemove(id);
+
+    //returns message confirming post deletion
+    res.json({message: 'Post deleted successfully'})
 }
