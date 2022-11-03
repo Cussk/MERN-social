@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from 'react-file-base64';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import useStyles from "./styles";
-import { createPost } from "../../actions/posts";
+import { createPost, updatePost } from "../../actions/posts";
 
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
     const [postData, setPostData] = useState({
         creator: '',
         title: '',
@@ -14,29 +14,48 @@ const Form = () => {
         selectedFile: ''
     });
 
+    //fetches a post if id matches found id else return nothing
+    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    // useEffect(() =>{
-    //     if(post) setPostData(post);
-    // }, [post])
+    //uses post data from id to populate the form for updating
+    useEffect(() =>{
+        if(post) setPostData(post);
+    }, [post])
 
     //submits POST request
     const handleSubmit = (e) => {
         e.preventDefault(); //prevents page refresh
-
-        //dispatches request to post reducer
+        
+        //if there is a current post dispatch request to reducer to update post data 
+        if(currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+        //dispatches request to post reducer to create a post
         dispatch(createPost(postData));
+        }
+        //clears form after submit
+        clear();
     };
 
+    //clears form when clicking clear button
     const clear = () => {
-
+        setCurrentId(null);
+        setPostData({
+            creator: '',
+            title: '',
+            message: '',
+            tags: '',
+            selectedFile: ''
+        })
     };
     
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">Creating a Memory</Typography>
+                <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
                 <TextField 
                 name="creator" 
                 variant="outlined" 
