@@ -23,7 +23,7 @@ Live version of site can be found at TBD
 3. Install the dependencies (2 nodes required)
    
     ```shell
-    cd clinet
+    cd client
     npm install
     ```
     
