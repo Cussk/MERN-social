@@ -26,7 +26,7 @@ const Form = ({currentId, setCurrentId}) => {
     }, [post])
 
     //submits POST request
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault(); //prevents page refresh
         
         //if there is a current post dispatch request to reducer to update post data 
@@ -34,7 +34,7 @@ const Form = ({currentId, setCurrentId}) => {
             dispatch(updatePost(currentId, postData));
         } else {
         //dispatches request to post reducer to create a post
-        dispatch(createPost(postData));
+            dispatch(createPost(postData));
         }
         //clears form after submit
         clear();
