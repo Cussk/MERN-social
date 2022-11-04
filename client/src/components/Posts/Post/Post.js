@@ -29,16 +29,16 @@ const Post = ({post, setCurrentId}) => {
                 {/* loops over tags and displays them with a # in front */}
             <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag}`)}</Typography>
             </div>
-            <Typography className={classes.title} variant="h5" color="gutterBottom">{post.title}</Typography>
+            <Typography className={classes.title} variant="h5" gutterBottom>{post.title}</Typography>
             <CardContent>
-                <Typography variant="h5" color="gutterBottom">{post.message}</Typography>
+                <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 {/* likes post on button click */}
                 <Button size="small" color="primary"
                 onClick={() => {dispatch(likePost(post._id))}}>
                     <ThumbUpAltIcon fontSize="small" />
-                    Like
+                    &nbsp; Like &nbsp;
                     {post.likeCount}
                 </Button>
                 {/* deletes post on button click */}

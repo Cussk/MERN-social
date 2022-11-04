@@ -55,7 +55,7 @@ const Form = ({currentId, setCurrentId}) => {
     return (
         <Paper className={classes.paper}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a Memory</Typography>
+                <Typography variant="h6">{currentId ? 'Editing' : 'Creating'} a reflection</Typography>
                 <TextField 
                 name="creator" 
                 variant="outlined" 
@@ -86,7 +86,7 @@ const Form = ({currentId, setCurrentId}) => {
                 label="Tags" 
                 fullWidth 
                 value={postData.tags}
-                onChange={(e) => setPostData({...postData, tags: e.target.value})} //allows data to persist only updated stated target, in this case 'tags'
+                onChange={(e) => setPostData({...postData, tags: e.target.value.split(',')})} //allows data to persist only updated stated target, in this case 'tags' split tags by ,
                 />
                 <div className={classes.fileInput}>
                     <FileBase 
