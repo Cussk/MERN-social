@@ -46,7 +46,7 @@ export const updatePost = async (req,res) => {
     //if not valid mongoose id return 404 error
     if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id');
 
-    //updates post  in database by finding its id
+    //updates post in database by finding its id
      const updatedPost = await PostMessage.findByIdAndUpdate(_id, {...post, _id}, {new: true});
 
      //returns updated post json object

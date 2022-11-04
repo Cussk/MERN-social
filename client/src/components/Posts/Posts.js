@@ -7,8 +7,6 @@ import useStyles from "./styles";
 const Posts = ({setCurrentId}) => {
     const posts = useSelector((state) => state.posts);
     const classes = useStyles();
-
-    console.log(posts);
     
     return (
         //if no posts to retrieve display loading spinner
@@ -19,7 +17,7 @@ const Posts = ({setCurrentId}) => {
                 {posts.map((post) => (
                     <Grid key={post._id} item xs={12} sm={6}>
                         {/* display individual posts */}
-                        <Post post={post} setCurrentId/>
+                        <Post post={post} setCurrentId={setCurrentId}/>
                     </Grid>
                 ))}   
             </Grid>

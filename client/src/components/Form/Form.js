@@ -15,7 +15,7 @@ const Form = ({currentId, setCurrentId}) => {
     });
 
     //fetches a post if id matches found id else return nothing
-    const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null);
+    const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const Form = ({currentId, setCurrentId}) => {
     }, [post])
 
     //submits POST request
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); //prevents page refresh
         
         //if there is a current post dispatch request to reducer to update post data 
