@@ -4,7 +4,7 @@
 
 This project was created to showcase my Full Stack development abilities with the MERN stack.  Using the React.js framework, Redux.js, express.js, Mongo DB, and Material CSS to create a dynamic social media web app where you can create, update delete, and like posts.  This project reinforced the use of the MERN stack to link a Mongo DB database to a React front-end app with epxress.js and mongoose.  
 
-Live version of site can be found at TBD
+Live version of site can be found at [TBD](https://mern-soical.netlify.app/)
 
 ## Installation
 
